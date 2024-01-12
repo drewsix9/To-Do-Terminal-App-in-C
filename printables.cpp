@@ -1,7 +1,4 @@
-#include <iomanip>
-#include <iostream>
-
-using namespace std;
+#include "printables.h"
 
 void printHeader() {
   cout << setfill('-') << setw(56) << "" << endl;
