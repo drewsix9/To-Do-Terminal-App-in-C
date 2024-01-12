@@ -1,49 +1,11 @@
-#include "printables.cpp"
-#include <iomanip>
-#include <iostream>
-#include <string>
+#include "database.h"
 
 using namespace std;
-
-class Item {
-public:
-  string Description;
-  bool isComplete;
-  Item() : Description("Empty"), isComplete(false) {}
-  Item(string description) : Description(description), isComplete(false) {}
-  ~Item() {}
-  // TODO: add a destructor
-};
-
-class DataBase {
-private:
-  class Node {
-  public:
-    Item item;
-    Node *next;
-    Node(Item item) : item(item), next(nullptr) {}
-    Node(Item item, Node *next) : item(item), next(next) {}
-  };
-
-public:
-  int size;
-  Node *head;
-  DataBase() : size(0), head(nullptr) {}
-  int getSize() { return this->size; }
-  void addItem(Item item);
-  void deleteItem(int index);
-  void deleteHead();
-  void destroyNode(Node *delNode);
-  void displayList();
-  void toggleItem(int index);
-  bool isInRange(int index) { return (index >= 0 && index <= size); }
-  void deleteCheckedItems();
-  // TODO: add a destructor
-};
 
 void DataBase::addItem(Item item) {
   if (!head) {
     head = new Node(item);
+    this->size++;
     return;
   }
   Node *curr = head;
@@ -87,6 +49,7 @@ void DataBase::deleteHead() {
 
 void DataBase::destroyNode(Node *delNode) {
   delete delNode;
+  delNode = nullptr;
 }
 
 void printItem(Item item, int index) {
@@ -125,15 +88,12 @@ void DataBase::deleteCheckedItems() {
   if (!head) {
     return;
   }
+  Node *dummy = new Node(Item(), head);
   Node *curr = head;
-  Node *prev = nullptr;
+  Node *prev = dummy;
   while (curr) {
     if (curr->item.isComplete) {
-      if (curr == head) {
-        deleteHead();
-        curr = head;
-        continue;
-      }
+      this->size--;
       prev->next = curr->next;
       destroyNode(curr);
       curr = prev->next;
@@ -142,4 +102,18 @@ void DataBase::deleteCheckedItems() {
     prev = curr;
     curr = curr->next;
   }
+  head = dummy->next;
+}
+
+Item DataBase::operator[](int index) {
+  Node *curr = head;
+  int i = 0;
+  while (curr && i < index) {
+    curr = curr->next;
+    i++;
+  }
+  if (!curr) {
+    return Item();
+  }
+  return curr->item;
 }
