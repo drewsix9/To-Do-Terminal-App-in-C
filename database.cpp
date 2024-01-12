@@ -5,6 +5,7 @@ using namespace std;
 void DataBase::addItem(Item item) {
   if (!head) {
     head = new Node(item);
+    this->size++;
     return;
   }
   Node *curr = head;
@@ -87,17 +88,12 @@ void DataBase::deleteCheckedItems() {
   if (!head) {
     return;
   }
-  // Node *dummy = new Node(Item(), head);
+  Node *dummy = new Node(Item(), head);
   Node *curr = head;
-  Node *prev = nullptr;
+  Node *prev = dummy;
   while (curr) {
     if (curr->item.isComplete) {
       this->size--;
-      if (curr == head) {
-        deleteHead();
-        curr = head;
-        continue;
-      }
       prev->next = curr->next;
       destroyNode(curr);
       curr = prev->next;
@@ -106,6 +102,7 @@ void DataBase::deleteCheckedItems() {
     prev = curr;
     curr = curr->next;
   }
+  head = dummy->next;
 }
 
 Item DataBase::operator[](int index) {

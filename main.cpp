@@ -16,6 +16,7 @@ int main() {
   char choice;
   while (1) {
     system("cls");
+    cout << "[INFO] Current Size: " << db->size << "\n";
     printHeader();
     db->displayList();
     printCommands();

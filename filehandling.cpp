@@ -38,11 +38,14 @@ DataBase *loadFromFile(string fileName) {
   char *bufferDescription;
   bool bufferIsComplete;
   char bufferLine[50];
+  int _size = 0;
   while (readfile.getline(bufferLine, 50)) {
     bufferDescription = strtok(bufferLine, ",");
     string bufferDescriptionCpp(bufferDescription);
     bufferIsComplete = (strtok(nullptr, ",") == "1");
     db->addItem(Item(bufferDescriptionCpp, bufferIsComplete));
+    _size++;
   }
+  db->size = _size;
   return db;
 }

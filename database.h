@@ -26,6 +26,7 @@ private:
   public:
     Item item;
     Node *next;
+    Node() : item(), next(nullptr) {}
     Node(Item item) : item(item), next(nullptr) {}
     Node(Item item, Node *next) : item(item), next(next) {}
   };
