@@ -48,6 +48,7 @@ void DataBase::deleteHead() {
 
 void DataBase::destroyNode(Node *delNode) {
   delete delNode;
+  delNode = nullptr;
 }
 
 void printItem(Item item, int index) {
@@ -86,10 +87,12 @@ void DataBase::deleteCheckedItems() {
   if (!head) {
     return;
   }
+  // Node *dummy = new Node(Item(), head);
   Node *curr = head;
   Node *prev = nullptr;
   while (curr) {
     if (curr->item.isComplete) {
+      this->size--;
       if (curr == head) {
         deleteHead();
         curr = head;

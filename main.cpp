@@ -1,7 +1,6 @@
 #include "database.h"
 #include "fileHandling.h"
 #include "printables.h"
-#include <cassert>
 #include <iostream>
 #include <string>
 

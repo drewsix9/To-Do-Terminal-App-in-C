@@ -14,8 +14,10 @@ public:
   Item() : Description("Empty"), isComplete(false) {}
   Item(string description) : Description(description), isComplete(false) {}
   Item(string description, bool iscomplete) : Description(description), isComplete(iscomplete) {}
-  ~Item() {}
-  // TODO: add a destructor
+  ~Item() {
+    Description.clear();
+    isComplete = false;
+  }
 };
 
 class DataBase {
