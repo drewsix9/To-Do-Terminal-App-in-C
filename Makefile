@@ -2,7 +2,7 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
 # Source files
 SRCS = main.cpp database.cpp printables.cpp filehandling.cpp

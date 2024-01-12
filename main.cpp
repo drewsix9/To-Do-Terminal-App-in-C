@@ -1,6 +1,7 @@
 #include "database.h"
 #include "fileHandling.h"
 #include "printables.h"
+#include <cassert>
 #include <iostream>
 #include <string>
 
@@ -10,7 +11,7 @@ void addTask(DataBase &db);
 void deleteTask(DataBase &db);
 
 int main() {
-  string filename("todo.txt");
+  string filename("todo.csv");
   DataBase *db = loadFromFile(filename);
   string input;
   char choice;
@@ -33,7 +34,7 @@ int main() {
     } else {
       cout << "\nInvalid Input\n";
     }
-    saveToFile("todo.csv", *db);
+    saveToFile(filename, *db);
   }
 }
 

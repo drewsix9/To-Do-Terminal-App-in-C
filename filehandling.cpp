@@ -17,7 +17,7 @@ void saveToFile(string fileName, DataBase &db) {
     fprintf(stderr, "Error opening file.\n");
     exit(1);
   }
-  for (int i = 0; i < db.getSize(); i++) {
+  for (int i = 0; i <= db.getSize(); i++) {
     writefile << db[i].Description << "," << db[i].isComplete << endl;
   }
   writefile.close();
