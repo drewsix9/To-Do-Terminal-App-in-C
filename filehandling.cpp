@@ -7,6 +7,7 @@ bool fileExists(string fileName) {
   if (!testfile.is_open()) {
     return false;
   }
+  testfile.close();
   return true;
 }
 
@@ -17,7 +18,7 @@ void saveToFile(string fileName, DataBase &db) {
     fprintf(stderr, "Error opening file.\n");
     exit(1);
   }
-  for (int i = 0; i <= db.getSize(); i++) {
+  for (int i = 0; i < db.getSize(); i++) {
     writefile << db[i].Description << "," << db[i].isComplete << endl;
   }
   writefile.close();
@@ -39,10 +40,15 @@ DataBase *loadFromFile(string fileName) {
   bool bufferIsComplete;
   char bufferLine[50];
   int _size = 0;
+  int count = 0;
   while (readfile.getline(bufferLine, 50)) {
     bufferDescription = strtok(bufferLine, ",");
     string bufferDescriptionCpp(bufferDescription);
     bufferIsComplete = (strtok(nullptr, ",") == "1");
+    if (bufferDescriptionCpp.empty() || bufferDescription == nullptr) {
+      continue;
+    }
+    count++;
     db->addItem(Item(bufferDescriptionCpp, bufferIsComplete));
     _size++;
   }
