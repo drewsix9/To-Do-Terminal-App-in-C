@@ -1,5 +1,5 @@
+#include "csvreader.h"
 #include "database.h"
-#include "fileHandling.h"
 #include "printables.h"
 #include <iostream>
 #include <string>
@@ -10,8 +10,9 @@ void addTask(DataBase &db);
 void deleteTask(DataBase &db);
 
 int main() {
+  CSVreader reader;
   string filename("todo.csv");
-  DataBase *db = loadFromFile(filename);
+  DataBase *db = reader.loadFromFile(filename);
   string input;
   char choice;
   while (1) {
@@ -33,7 +34,7 @@ int main() {
     } else {
       cout << "\nInvalid Input\n";
     }
-    saveToFile(filename, *db);
+    reader.saveToFile(filename, *db);
   }
 }
 
