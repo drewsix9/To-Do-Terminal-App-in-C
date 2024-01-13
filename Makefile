@@ -6,7 +6,6 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
 # Source files
 SRCS = main.cpp database.cpp printables.cpp csvreader.cpp
-
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
