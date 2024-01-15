@@ -1,3 +1,5 @@
+# use Clang to compile
+
 # Compiler
 CXX = g++
 
